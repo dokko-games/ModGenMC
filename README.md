@@ -7,7 +7,7 @@ CraftIDE is designed to **accelerate mod development without boxing developers i
 
 ## ✨ Features
 
-* ⚡ **Fast, lightweight desktop app** With a svelte frontend + rust backend, both optimized for low resource consumption and good performance
+* ⚡ **Fast, lightweight desktop app**. With a svelte frontend + rust backend, CraftIDE is optimized for low resource consumption and good performance
 * 🧩 **Class generation** for:
   * Blocks
   * Items
@@ -107,17 +107,6 @@ CraftIDE follows a few core principles:
 * **Learning-friendly** — see real mod code as it’s created
 
 ---
-
-## 🛣️ Roadmap (Planned)
-
-* Entity & block entity generators
-* Data pack & JSON helpers
-* Advanced texture tools
-* In-app code editor improvements
-* Mod build & export tooling
-
----
-
 ## 🤝 Contributing
 
 Contributions, ideas, and feedback are welcome.
