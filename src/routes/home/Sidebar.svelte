@@ -12,13 +12,16 @@
     function handleCreate() {
       goto('/create');
     }
+    function test() {
+      console.log("test");
+    }
 </script>
 <div class="sidebar">
     <h1 class="appname">
         {appName && appVersion ? `${appName} v${appVersion}` : "Loading..."}
       </h1>
     <button class="glass" on:click={handleCreate}>Create...</button>
-    <button class="glass">Open...</button>
+    <button class="glass" on:click={test}>Open...</button>
     <button class="glass">Import...</button>
 </div>
 <style>

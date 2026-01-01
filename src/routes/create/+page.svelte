@@ -27,8 +27,7 @@
   }
 
   function createProject() {
-    console.log({ name, path, selectedVersion });
-    // your project creation logic
+    invoke("create_project", { name, path, selectedVersion });
   }
 
   function goBack() {

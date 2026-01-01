@@ -32,3 +32,10 @@ pub async fn get_recent_projects() -> Vec<models::Project> {
         },
     ]
 }
+#[tauri::command]
+pub async fn create_project(name: String, path: String, selected_version: String) -> () {
+    println!(
+        "Creating project {} at {} for {}",
+        name, path, selected_version
+    );
+}
