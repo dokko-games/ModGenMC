@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "ModGenMC",
+  "productName": "CraftIDE",
   "version": "0.1.0",
-  "identifier": "org.dokko.modgenmc",
+  "identifier": "org.dokko.craft_ide",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -13,7 +13,7 @@
   "app": {
     "windows": [
       {
-        "title": "ModGenMC",
+        "title": "CraftIDE",
         "width": 800,
         "height": 600,
         "minWidth": 100,
