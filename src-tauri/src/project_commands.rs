@@ -1,4 +1,5 @@
 use crate::models;
+use crate::project as crateproj;
 
 //TODO: read from a "recent" list
 #[tauri::command]
@@ -39,4 +40,9 @@ pub async fn create_project(name: String, path: String, selected_version: String
         "Creating project {} at {} for Fabric {}",
         name, path, selected_version
     );
+    let project = crateproj::Project {
+        data: models::ProjectData { name, path, target_version: selected_version.parse().unwrap() }
+    };
+    println!("{}", project);
+    println!("Done!");
 }

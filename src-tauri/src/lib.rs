@@ -1,5 +1,6 @@
 pub mod models;
 pub mod project_commands;
+pub mod project;
 
 use crate::models::Version;
 

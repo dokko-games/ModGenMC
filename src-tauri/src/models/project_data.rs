@@ -1,4 +1,4 @@
-use crate::models::version::Version;
+use crate::models::Version;
 use serde::Serialize;
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
