@@ -42,7 +42,7 @@
 
 
 <style>
-    h1 {
+h1 {
   margin: 30px;
   margin-bottom: 10px;
 }
@@ -55,7 +55,6 @@
 .error {
   margin: 0 30px;
   margin-top: 8px;
-  color: #ff7575;
 }
 
 .recent-list {

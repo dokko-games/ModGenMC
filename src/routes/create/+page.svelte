@@ -9,6 +9,7 @@
   let path = "";
   let versions: Version[] = [];
   let selectedVersion = "";
+  let errorMessage = "";
 
   // get versions from Rust on mount
   onMount(async () => {
@@ -26,8 +27,29 @@
     }
   }
 
-  function createProject() {
-    invoke("create_project", { name, path, selectedVersion });
+  async function createProject() {
+    // basic validation
+    if (!name.trim()) {
+      errorMessage = "Project name cannot be empty.";
+      return;
+    }
+
+    if (!path.trim()) {
+      errorMessage = "Project path cannot be empty.";
+      return;
+    }
+    if (!selectedVersion.trim()) {
+      errorMessage = "You must select a version.";
+      return;
+    }
+    await invoke("create_project", {
+        name,
+        path,
+        selectedVersion,
+      });
+
+    // success → navigate
+    goto("/");
   }
 
   function goBack() {
@@ -42,12 +64,12 @@
 </h1>
 
 <div class="form-group">
-  <label>Project Name</label>
+  <label for="project_name">Project Name</label>
   <input placeholder="Enter project name" bind:value={name} />
 </div>
 
 <div class="form-group">
-  <label>Project Path</label>
+  <label for="project_path">Project Path</label>
   <div class="path-select">
     <span class="path-display">{path || "No folder selected"}</span>
     <button on:click={selectFolder}>Choose…</button>
@@ -55,7 +77,7 @@
 </div>
 
 <div class="form-group">
-  <label>Version</label>
+  <label for="mc_version">Minecraft Version</label>
   <select bind:value={selectedVersion}>
     <option disabled value="">Select version</option>
     {#each versions as ver}
@@ -67,6 +89,7 @@
 </div>
 
 <button on:click={createProject}>Create</button>
+<p class="error">{errorMessage}</p>
 </div>
 
 <style>

@@ -46,3 +46,16 @@ impl fmt::Display for Version {
         }
     }
 }
+
+impl fmt::Display for VersionParseError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            VersionParseError::InvalidFormat => {
+                write!(f, "invalid version format (expected MAJOR.MINOR or MAJOR.MINOR.PATCH)")
+            }
+            VersionParseError::InvalidNumber => {
+                write!(f, "invalid number in version (expected numeric components)")
+            }
+        }
+    }
+}

@@ -43,6 +43,5 @@ pub async fn create_project(name: String, path: String, selected_version: String
     let project = crateproj::Project {
         data: models::ProjectData { name, path, target_version: selected_version.parse().unwrap() }
     };
-    println!("{}", project);
     println!("Done!");
 }
