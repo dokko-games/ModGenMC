@@ -2,7 +2,7 @@ use std::str::FromStr;
 use std::fmt;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Clone, Hash)]
 #[serde(rename_all = "camelCase")]
 pub struct Version {
     pub major: u8,

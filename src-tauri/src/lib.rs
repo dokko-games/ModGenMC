@@ -1,7 +1,9 @@
 mod models;
 mod commands;
 mod storage;
+mod core;
 use crate::models::version;
+use std::sync::Mutex;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -18,6 +20,9 @@ pub fn run() {
             commands::project::get_recent_projects,
             commands::project::create_project
         ])
+        .manage(core::state::AppState {
+            current_project: Mutex::new(None),
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
