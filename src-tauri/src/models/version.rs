@@ -2,14 +2,13 @@ use std::str::FromStr;
 use std::fmt;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub struct Version {
     pub major: u8,
     pub minor: u8,
     pub patch: u8,
 }
-
 #[derive(Debug)]
 pub enum VersionParseError {
     InvalidFormat,
