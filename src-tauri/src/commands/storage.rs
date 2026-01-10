@@ -19,7 +19,7 @@ pub fn save_current_project(state: tauri::State<AppState>) -> Result<(), String>
             .map_err(|e| format!("Failed to create project directory: {e}"))?;
     }
 
-    let json = crate::storage::project_files::project_json(project);
+    let json = crate::storage::project_files::project_to_json(project);
 
     let json_string = serde_json::to_string_pretty(&json)
         .map_err(|e| format!("Failed to serialize project json: {e}"))?;

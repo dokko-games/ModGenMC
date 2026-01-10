@@ -1,8 +1,9 @@
 use std::{path::PathBuf, collections::HashSet};
 
 use tauri::{AppHandle, Manager};
+use std::fs;
 
-use crate::{core::state::AppState, models::{project, recent, version}};
+use crate::{core::state::AppState, models::{project, recent, version}, storage};
 //TODO: validate name on svelte: no first numbers, no weird letters
 #[tauri::command]
 pub async fn create_project(
@@ -41,6 +42,18 @@ pub async fn create_project(
     set_current_project(&state, new_project);
     println!("{:?}", state.current_project.lock().unwrap().clone());
     Ok(())
+}
+#[tauri::command]
+pub async fn open_project(state: tauri::State<'_, AppState>, project_path: PathBuf) -> Result<(), String> {
+    let mut path = project_path;
+    path.push(".craftide");
+    path.push("project.json");
+    let contents = fs::read_to_string(&path)
+        .map_err(|_| format!("Could not read project files"))?;
+    let proj = storage::project_files::json_to_project(&contents);
+    set_current_project(&state, proj);
+    Ok(())
+
 }
 pub fn set_current_project(state: &tauri::State<AppState>, project: project::Project) {
     let mut current = state.current_project.lock().unwrap();

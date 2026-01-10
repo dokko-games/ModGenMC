@@ -9,6 +9,6 @@ pub trait Generate {
 }
 impl Generate for Generator {
     fn generate(&self) {
-        println!("Generator {}/{}", self.name, self.domain);
+        println!("Running Generator {}/{}...", self.name, self.domain);
     }
 }

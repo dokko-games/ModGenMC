@@ -2,15 +2,39 @@
     import { goto } from "$app/navigation";
     import { getName, getVersion } from "@tauri-apps/api/app";
     import { invoke } from "@tauri-apps/api/core";
+    import { open } from "@tauri-apps/plugin-dialog";
     import { onMount } from "svelte";
     let appName = "";
     let appVersion = "";
+    let loadPath = "";
+    let error = "";
     onMount(async () => {
         appName = await getName();
         appVersion = await getVersion();
     });
+    async function selectFolder() {
+      const selected = await open({
+        directory: true,
+        multiple: false,
+        title: "Select Project Folder",
+      });
+      if (typeof selected === "string") {
+        loadPath = selected;
+      }
+  }
     function handleCreate() {
       goto('/create');
+    }
+    async function handleOpen() {
+      await selectFolder();
+      if(!loadPath) return;
+      try {
+        await invoke("open_project", {
+          projectPath: loadPath, // MUST match Rust parameter name
+        });
+      } catch (err) {
+        error = `Error: ${err}`;
+      }
     }
 </script>
 <div class="sidebar">
@@ -18,10 +42,17 @@
         {appName && appVersion ? `${appName} v${appVersion}` : "Loading..."}
       </h1>
     <button class="glass" on:click={handleCreate}>Create...</button>
-    <button class="glass">Open...</button>
+    <button class="glass" on:click={handleOpen}>Open...</button>
     <button class="glass">Import...</button>
+    {#if error}
+    <p class="dark_error">{error}</p>
+    {/if}
 </div>
 <style>
+.dark_error {
+  color: rgb(255, 73, 73);
+  text-shadow: 2px 2px 2px black;
+}
 button.glass {
     height: 50px;
     font-family: 'Poppins';
